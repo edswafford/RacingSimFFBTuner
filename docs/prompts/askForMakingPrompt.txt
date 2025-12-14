@@ -1,0 +1,1 @@
+I want to ...  Ask me aseries of yes/no questions that will help you provide better recommendations.  Once I answer all the questions.  Then if you need more clarification ask me any other questions that may help with a better response.
