@@ -29,11 +29,16 @@ indent_size = 2
 indent_style = space
 indent_size = 2
 
+# YAML files
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
 # Markdown files
 [*.md]
 trim_trailing_whitespace = false
 
-# StyleCop Analyzers
+# .NET code style settings
 [*.cs]
 
 #### Core EditorConfig Options ####
@@ -41,166 +46,380 @@ trim_trailing_whitespace = false
 # Indentation preferences
 indent_style = space
 indent_size = 4
+tab_width = 4
 
-# New line preferences
-end_of_line = crlf
-
-#### .NET Coding Conventions ####
+#### .NET Code Style Rules ####
 
 # Organize usings
 dotnet_sort_system_directives_first = true
 dotnet_separate_import_directive_groups = false
 
 # this. preferences
-dotnet_style_qualification_for_field = false
-dotnet_style_qualification_for_property = false
-dotnet_style_qualification_for_method = false
-dotnet_style_qualification_for_event = false
+dotnet_style_qualification_for_field = false:warning
+dotnet_style_qualification_for_property = false:warning
+dotnet_style_qualification_for_method = false:warning
+dotnet_style_qualification_for_event = false:warning
 
 # Language keywords vs BCL types preferences
-dotnet_style_predefined_type_for_locals_parameters_members = true
-dotnet_style_predefined_type_for_member_access = true
+dotnet_style_predefined_type_for_locals_parameters_members = true:warning
+dotnet_style_predefined_type_for_member_access = true:warning
 
 # Parentheses preferences
-dotnet_style_parentheses_in_arithmetic_binary_operators = always_for_clarity
-dotnet_style_parentheses_in_relational_binary_operators = always_for_clarity
-dotnet_style_parentheses_in_other_binary_operators = always_for_clarity
-dotnet_style_parentheses_in_other_operators = never_if_unnecessary
+dotnet_style_parentheses_in_arithmetic_binary_operators = always_for_clarity:warning
+dotnet_style_parentheses_in_relational_binary_operators = always_for_clarity:warning
+dotnet_style_parentheses_in_other_binary_operators = always_for_clarity:warning
+dotnet_style_parentheses_in_other_operators = never_if_unnecessary:warning
 
 # Modifier preferences
-dotnet_style_require_accessibility_modifiers = always
-dotnet_style_readonly_field = true
+dotnet_style_require_accessibility_modifiers = always:warning
+dotnet_style_readonly_field = true:warning
 
 # Expression-level preferences
-dotnet_style_object_initializer = true
-dotnet_style_collection_initializer = true
-dotnet_style_explicit_tuple_names = true
-dotnet_style_null_propagation = true
-dotnet_style_coalesce_expression = true
-dotnet_style_prefer_is_null_check_over_reference_equality_method = true
-dotnet_style_prefer_inferred_tuple_names = true
-dotnet_style_prefer_inferred_anonymous_type_member_names = true
-dotnet_style_prefer_auto_properties = true
-dotnet_style_prefer_conditional_expression_over_assignment = true
-dotnet_style_prefer_conditional_expression_over_return = true
-dotnet_style_prefer_compound_assignment = true
-dotnet_style_prefer_simplified_interpolation = true
-
-#### C# Coding Conventions ####
-
-# var preferences
-csharp_style_var_for_built_in_types = false
-csharp_style_var_when_type_is_apparent = true
-csharp_style_var_elsewhere = false
-
-# Expression-bodied members
-csharp_style_expression_bodied_methods = false
-csharp_style_expression_bodied_constructors = false
-csharp_style_expression_bodied_operators = false
-csharp_style_expression_bodied_properties = true
-csharp_style_expression_bodied_indexers = true
-csharp_style_expression_bodied_accessors = true
-
-# Pattern matching preferences
-csharp_style_pattern_matching_over_is_with_cast_check = true
-csharp_style_pattern_matching_over_as_with_null_check = true
-csharp_style_prefer_switch_expression = true
-csharp_style_prefer_pattern_matching = true
-csharp_style_prefer_not_pattern = true
-csharp_style_prefer_extended_property_pattern = true
+dotnet_style_object_initializer = true:suggestion
+dotnet_style_collection_initializer = true:suggestion
+dotnet_style_explicit_tuple_names = true:warning
+dotnet_style_null_propagation = true:suggestion
+dotnet_style_coalesce_expression = true:suggestion
+dotnet_style_prefer_is_null_check_over_reference_equality_method = true:warning
+dotnet_style_prefer_inferred_tuple_names = true:suggestion
+dotnet_style_prefer_inferred_anonymous_type_member_names = true:suggestion
+dotnet_style_prefer_auto_properties = true:silent
+dotnet_style_prefer_conditional_expression_over_assignment = true:silent
+dotnet_style_prefer_conditional_expression_over_return = true:silent
+dotnet_style_prefer_compound_assignment = true:suggestion
+dotnet_style_prefer_simplified_interpolation = true:suggestion
+dotnet_style_prefer_simplified_boolean_expressions = true:suggestion
 
 # Null-checking preferences
-csharp_style_throw_expression = true
-csharp_style_conditional_delegate_call = true
+dotnet_style_prefer_conditional_expression_over_assignment = true:silent
+dotnet_style_prefer_conditional_expression_over_return = true:silent
+
+# Modifier preferences
+dotnet_style_require_accessibility_modifiers = always:warning
+
+# Expression-bodied members
+dotnet_style_expression_bodied_methods = when_on_single_line:suggestion
+dotnet_style_expression_bodied_constructors = false:warning
+dotnet_style_expression_bodied_operators = when_on_single_line:suggestion
+dotnet_style_expression_bodied_properties = true:suggestion
+dotnet_style_expression_bodied_indexers = true:suggestion
+dotnet_style_expression_bodied_accessors = true:suggestion
+
+# Pattern matching preferences
+dotnet_style_pattern_matching_over_is_with_cast_check = true:warning
+dotnet_style_pattern_matching_over_as_with_null_check = true:warning
+
+# Null-checking preferences
+dotnet_style_prefer_conditional_expression_over_assignment = true:silent
+dotnet_style_prefer_conditional_expression_over_return = true:silent
+
+# Code-block preferences
+dotnet_style_prefer_braces = true:warning
+
+#### C# Code Style Rules ####
+
+# var preferences
+csharp_style_var_for_built_in_types = false:warning
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_var_elsewhere = false:warning
+
+# Expression-bodied members
+csharp_style_expression_bodied_methods = when_on_single_line:suggestion
+csharp_style_expression_bodied_constructors = false:warning
+csharp_style_expression_bodied_operators = when_on_single_line:suggestion
+csharp_style_expression_bodied_properties = true:suggestion
+csharp_style_expression_bodied_indexers = true:suggestion
+csharp_style_expression_bodied_accessors = true:suggestion
+
+# Pattern matching preferences
+csharp_style_pattern_matching_over_is_with_cast_check = true:warning
+csharp_style_pattern_matching_over_as_with_null_check = true:warning
+csharp_style_prefer_switch_expression = true:suggestion
+csharp_style_prefer_pattern_matching = true:silent
+csharp_style_prefer_not_pattern = true:suggestion
+csharp_style_prefer_extended_property_pattern = true:suggestion
+
+# Null-checking preferences
+csharp_style_throw_expression = true:suggestion
+csharp_style_conditional_delegate_call = true:warning
 
 # Modifier preferences
 csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async:suggestion
 
 # Code-block preferences
-csharp_prefer_braces = true
-csharp_prefer_simple_using_statement = true
-csharp_style_namespace_declarations = file_scoped
+csharp_prefer_braces = true:warning
+csharp_prefer_simple_using_statement = true:suggestion
+csharp_prefer_simple_default_expression = true:suggestion
 
 # Expression-level preferences
-csharp_prefer_simple_default_expression = true
-csharp_style_pattern_local_over_anonymous_function = true
-csharp_style_inlined_variable_declaration = true
-csharp_style_prefer_index_operator = true
-csharp_style_prefer_range_operator = true
-csharp_style_implicit_object_creation_when_type_is_apparent = true
-csharp_style_prefer_tuple_swap = true
-csharp_style_prefer_utf8_string_literals = true
-csharp_style_unused_value_expression_statement_preference = discard_variable
-csharp_style_unused_value_assignment_preference = discard_variable
+csharp_prefer_simple_default_expression = true:suggestion
+csharp_style_deconstructed_variable_declaration = true:suggestion
+csharp_prefer_index_operator = true:suggestion
+csharp_prefer_range_operator = true:suggestion
+csharp_style_prefer_method_group_conversion = true:suggestion
+csharp_style_prefer_top_level_statements = false:warning
+csharp_style_implicit_object_creation_when_type_is_apparent = true:suggestion
 
-#### StyleCop Analyzers ####
+# 'using' directive preferences
+csharp_using_directive_placement = outside_namespace:warning
 
-# SA0001: XmlCommentAnalysisDisabled - Disabled (handled by StyleCop)
-# SA1200: UsingDirectivesMustBePlacedCorrectly
-# SA1201: ElementsMustAppearInTheCorrectOrder
-# SA1202: ElementsMustBeOrderedByAccess
-# SA1204: StaticElementsMustAppearBeforeInstanceElements
-# SA1205: PartialElementsMustDeclareAccess
-# SA1208: SystemUsingDirectivesMustBePlacedBeforeOtherUsingDirectives
-# SA1209: UsingAliasDirectivesMustBePlacedAfterAllUsingDirectives
-# SA1210: UsingDirectivesMustBeOrderedAlphabeticallyByNamespace
-# SA1211: UsingAliasDirectivesMustBeOrderedAlphabeticallyByAliasName
-# SA1212: PropertyAccessorsMustFollowOrder
-# SA1213: EventAccessorsMustFollowOrder
-# SA1214: ReadonlyElementsMustAppearBeforeNonReadonlyElements
-# SA1215: InstanceReadonlyElementsMustAppearBeforeInstanceNonReadonlyElements
-# SA1216: UsingStaticDirectivesMustBePlacedAtTheCorrectLocation
-# SA1217: UsingStaticDirectivesMustBeOrderedAlphabetically
-# SA1300: ElementMustBeginWithUpperCaseLetter
-# SA1301: ElementMustNotContainUnderscore
-# SA1302: InterfaceNamesMustBeginWithI
-# SA1303: ConstFieldNamesMustBeginWithUpperCaseLetter
-# SA1304: NonPrivateReadonlyFieldsMustBeginWithUpperCaseLetter
-# SA1305: FieldNamesMustNotUseHungarianNotation
-# SA1306: FieldNamesMustBeginWithLowerCaseLetter
-# SA1307: AccessibleFieldsMustBeginWithUpperCaseLetter
-# SA1308: VariableNamesMustNotBePrefixed
-# SA1309: FieldNamesMustNotBeginWithUnderscore
-# SA1310: FieldNamesMustNotContainUnderscore
-# SA1311: StaticReadonlyFieldsMustBeginWithUpperCaseLetter
-# SA1312: VariableNamesMustBeginWithLowerCaseLetter
-# SA1313: ParameterNamesMustBeginWithLowerCaseLetter
-# SA1314: TypeParameterNamesMustBeginWithT
-# SA1400: AccessModifierMustBeDeclared
-# SA1401: FieldsMustBePrivate
-# SA1402: FileMayOnlyContainASingleType
-# SA1403: FileMayOnlyContainASingleNamespace
-# SA1404: CodeAnalysisSuppressionMustHaveJustification
-# SA1405: DebugAssertMustProvideMessageText
-# SA1406: DebugFailMustProvideMessageText
-# SA1407: ArithmeticExpressionsMustDeclarePrecedence
-# SA1408: ConditionalExpressionsMustDeclarePrecedence
-# SA1410: AttributeConstructorMustHaveExplicitParameterNames
-# SA1411: AttributeConstructorMustNotUseUnnecessaryParenthesis
-# SA1412: StoreFilesAsUtf8
-# SA1413: UseTrailingCommasInMultiLineInitializers
-# SA1500: BracesForMultiLineStatementsMustNotShareLine
-# SA1501: StatementMustNotBeOnSingleLine
-# SA1502: ElementMustNotBeOnSingleLine
-# SA1503: BracesMustNotBeOmitted
-# SA1504: AllAccessorsMustBeMultiLineOrSingleLine
-# SA1505: OpeningBracesMustNotBeFollowedByBlankLine
-# SA1506: ElementDocumentationHeadersMustNotBeFollowedByBlankLine
-# SA1507: CodeMustNotContainMultipleBlankLinesInARow
-# SA1508: ClosingBracesMustNotBePrecededByBlankLine
-# SA1509: OpeningBracesMustNotBePrecededByBlankLine
-# SA1510: ChainedStatementBlocksMustNotBePrecededByBlankLine
-# SA1511: WhileDoFooterMustNotBePrecededByBlankLine
-# SA1512: SingleLineCommentsMustNotBeFollowedByBlankLine
-# SA1513: ClosingBraceMustBeFollowedByBlankLine
-# SA1514: ElementDocumentationHeaderMustBePrecededByBlankLine
-# SA1515: SingleLineCommentMustBePrecededByBlankLine
-# SA1516: ElementsMustBeSeparatedByBlankLine
-# SA1517: CodeMustNotContainBlankLinesAtStartOfFile
-# SA1518: CodeMustNotContainBlankLinesAtEndOfFile
-# SA1519: BracesMustNotBeOmittedFromMultiLineChildStatement
-# SA1520: UseBracesConsistently
+# New line preferences
+csharp_style_allow_embedded_statements_on_same_line_experimental = false:warning
+csharp_style_allow_blank_lines_after_colon_in_constructor_initializer_experimental = false:warning
+csharp_style_allow_blank_lines_after_conditional_expression_experimental = false:warning
 
-# Note: StyleCop Analyzers will be configured via stylecop.json file
-# This EditorConfig provides base formatting rules that align with IDesign standards
+# Indentation preferences
+csharp_indent_case_contents = true
+csharp_indent_switch_labels = true
+csharp_indent_labels = one_less_than_current
+csharp_indent_block_contents = true
+csharp_indent_braces = false
+csharp_indent_case_contents_when_block = true
 
+# Space preferences
+csharp_space_after_cast = false
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_between_parentheses = false
+csharp_space_before_colon_in_inheritance_clause = true
+csharp_space_after_colon_in_inheritance_clause = true
+csharp_space_around_binary_operators = before_and_after
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+csharp_space_between_method_declaration_empty_parameter_list_parentheses = false
+csharp_space_between_method_declaration_name_and_open_parenthesis = false
+csharp_space_between_method_call_parameter_list_parentheses = false
+csharp_space_between_method_call_empty_parameter_list_parentheses = false
+csharp_space_between_method_call_name_and_opening_parenthesis = false
+csharp_space_between_parentheses = false
+csharp_space_before_indexer_bracket = false
+csharp_space_between_indexer_bracket = false
+csharp_space_between_square_brackets = false
+
+# Wrapping preferences
+csharp_preserve_single_line_statements = true
+csharp_preserve_single_line_blocks = true
+
+#### StyleCop Analyzer Rules ####
+
+# SA0001: XML comment analysis is disabled by project settings but comments should still be valid
+# SA1200: Using directives should be placed correctly
+# SA1201: Elements should appear in the correct order
+# SA1202: 'public' methods should come before 'private' methods
+# SA1204: Static elements should appear before instance elements
+# SA1205: Partial elements should have an access modifier
+# SA1208: System using directives should be placed before other using directives
+# SA1209: Using alias directives should be placed after other using directives
+# SA1210: Using directives should be ordered alphabetically by namespace
+# SA1211: Using alias directives should be ordered alphabetically by alias name
+# SA1212: Property accessors should follow order
+# SA1213: Event accessors should follow order
+# SA1214: Readonly fields should appear before non-readonly fields
+# SA1215: Instance readonly fields should appear before instance non-readonly fields
+# SA1216: Using static directives should be placed after other using directives
+# SA1217: Using static directives should be ordered alphabetically
+# SA1300: Element should begin with an uppercase letter
+# SA1301: Element should not use Hungarian notation
+# SA1302: Interface names should begin with I
+# SA1303: Const field names should begin with upper-case letter
+# SA1304: Non-private readonly fields should begin with upper-case letter
+# SA1305: Field names should not use Hungarian notation
+# SA1306: Field names should begin with lower-case letter
+# SA1307: Field names should begin with upper-case letter
+# SA1308: Variable names should not be prefixed
+# SA1309: Field names should not begin with underscore
+# SA1310: Field names should not contain underscore
+# SA1311: Static readonly fields should begin with upper-case letter
+# SA1312: Variable names should begin with lower-case letter
+# SA1313: Parameter names should begin with lower-case letter
+# SA1314: Type parameter names should begin with T
+# SA1400: Access modifier should be declared
+# SA1401: Fields should be private
+# SA1402: File may only contain a single type
+# SA1403: File may only contain a single namespace
+# SA1404: Code analysis suppression should have justification
+# SA1405: Debug.Assert should provide message text
+# SA1406: Code should not contain empty statements
+# SA1407: Arithmetic expressions should declare precedence
+# SA1408: Conditional expressions should declare precedence
+# SA1409: Remove unnecessary parentheses
+# SA1410: Remove delegate parenthesis when possible
+# SA1411: Attribute constructor should not use unnecessary parenthesis
+# SA1412: Store files as UTF-8
+# SA1413: Use trailing comma in multi-line initializers
+# SA1500: Braces for multi-line statements should not share line
+# SA1501: Code should not have empty lines at the start of the file
+# SA1502: Element should not be on a single line
+# SA1503: Braces should not be omitted
+# SA1504: All accessors should be single-line or multi-line
+# SA1505: Opening braces should not be followed by blank line
+# SA1506: Element documentation headers should not be followed by blank line
+# SA1507: Code should not contain multiple blank lines in a row
+# SA1508: Closing braces should not be preceded by blank line
+# SA1509: Opening braces should not be preceded by blank line
+# SA1510: Chained statement blocks should not be preceded by blank line
+# SA1511: While-do footer should not be preceded by blank line
+# SA1512: Single-line comments should not be followed by blank line
+# SA1513: Closing brace should be followed by blank line
+# SA1514: Element documentation header should be preceded by blank line
+# SA1515: Single-line comment should be preceded by blank line
+# SA1516: Elements should be separated by blank line
+# SA1517: Code should not contain blank lines at the start of the file
+# SA1518: Code should not contain blank lines at the end of the file
+# SA1519: Braces should not be omitted from multi-line child statement
+# SA1520: Use braces consistently
+# SA1600: Elements should be documented
+# SA1601: Partial elements should be documented
+# SA1602: Enumeration items should be documented
+# SA1604: Element documentation should have summary
+# SA1605: Partial element documentation should have summary
+# SA1606: Element documentation should have summary text
+# SA1607: Partial element documentation should have summary text
+# SA1608: Element documentation should not have default summary
+# SA1609: Property documentation should have value
+# SA1610: Property documentation should have value text
+# SA1611: Element parameters should be documented
+# SA1612: Element parameter documentation should match
+# SA1613: Element parameter documentation should declare parameter name
+# SA1614: Element parameter documentation should have text
+# SA1615: Element return value should be documented
+# SA1616: Element return value documentation should have text
+# SA1617: Void return value should not be documented
+# SA1618: Generic type parameters should be documented
+# SA1619: Generic type parameters should be documented
+# SA1620: Generic type parameter documentation should match type parameters
+# SA1621: Generic type parameter documentation should be text
+# SA1622: Generic type parameter documentation should have text
+# SA1623: Property summary documentation should match accessors
+# SA1624: Property summary documentation should not use "Gets or sets"
+# SA1625: Element documentation should not be copied and pasted
+# SA1626: Single-line comments should not use documentation style
+# SA1627: Documentation text should not be empty
+# SA1628: Documentation text should begin with a capital letter
+# SA1629: Documentation text should end with a period
+# SA1630: Documentation text should contain whitespace
+# SA1631: Documentation should meet character percentage
+# SA1632: Documentation text should meet minimum character length
+# SA1633: File should have header
+# SA1634: File header should show copyright
+# SA1635: File header should have copyright text
+# SA1636: File header copyright text should match
+# SA1637: File header file attribute should match file name
+# SA1638: File header file attribute text should match
+# SA1639: File header should have summary
+# SA1640: File header should have a valid company text
+# SA1641: File header company name text should match
+# SA1642: Constructor summary documentation should begin with standard text
+# SA1643: Destructor summary documentation should begin with standard text
+# SA1648: inheritdoc should be used with inheriting class
+# SA1649: File name should match first type name
+# SA1651: Do not use placeholder elements
+
+# Disable some StyleCop rules that conflict with IDesign standard or modern C# practices
+# SA0001: XML comment analysis disabled - aligns with IDesign standard (avoid method-level documentation)
+dotnet_diagnostic.SA0001.severity = none
+
+# IDesign Standard: Do NOT use 'this.' prefix unless necessary
+dotnet_diagnostic.SA1101.severity = none
+
+# IDesign Standard: Regions are acceptable for code organization
+dotnet_diagnostic.SA1124.severity = none
+
+# SA1201: Element ordering conflicts with IDesign standard
+# IDesign standard: members, properties, constructors, methods
+# StyleCop SA1201: fields, constructors, properties, methods
+# Disabled to align with IDesign standard ordering
+dotnet_diagnostic.SA1201.severity = none
+
+# Allow var for built-in types (IDesign allows this in some cases)
+dotnet_diagnostic.IDE0008.severity = suggestion
+
+# Using directives ordering
+dotnet_diagnostic.SA1200.severity = warning
+dotnet_diagnostic.SA1208.severity = warning
+dotnet_diagnostic.SA1210.severity = warning
+dotnet_diagnostic.SA1202.severity = warning
+dotnet_diagnostic.SA1204.severity = warning
+
+# Naming conventions
+dotnet_diagnostic.SA1300.severity = warning
+dotnet_diagnostic.SA1306.severity = warning
+dotnet_diagnostic.SA1307.severity = warning
+dotnet_diagnostic.SA1309.severity = none
+dotnet_diagnostic.SA1310.severity = none
+dotnet_diagnostic.SA1311.severity = warning
+dotnet_diagnostic.SA1312.severity = warning
+dotnet_diagnostic.SA1313.severity = warning
+
+# Access modifiers
+dotnet_diagnostic.SA1400.severity = warning
+dotnet_diagnostic.SA1401.severity = warning
+dotnet_diagnostic.SA1402.severity = none
+dotnet_diagnostic.SA1403.severity = none
+
+# Code layout
+dotnet_diagnostic.SA1500.severity = warning
+dotnet_diagnostic.SA1501.severity = warning
+dotnet_diagnostic.SA1502.severity = none
+dotnet_diagnostic.SA1503.severity = warning
+dotnet_diagnostic.SA1505.severity = warning
+dotnet_diagnostic.SA1507.severity = warning
+dotnet_diagnostic.SA1508.severity = warning
+dotnet_diagnostic.SA1513.severity = warning
+dotnet_diagnostic.SA1514.severity = warning
+# SA1515: Single-line comment should be preceded by blank line
+# Disabled: Sometimes blank lines before comments reduce readability (e.g., inline attribute documentation)
+dotnet_diagnostic.SA1515.severity = none
+dotnet_diagnostic.SA1516.severity = warning
+dotnet_diagnostic.SA1517.severity = warning
+dotnet_diagnostic.SA1518.severity = warning
+
+# Documentation
+dotnet_diagnostic.SA1600.severity = warning
+dotnet_diagnostic.SA1601.severity = warning
+dotnet_diagnostic.SA1604.severity = warning
+dotnet_diagnostic.SA1605.severity = warning
+dotnet_diagnostic.SA1606.severity = warning
+dotnet_diagnostic.SA1607.severity = warning
+dotnet_diagnostic.SA1608.severity = warning
+dotnet_diagnostic.SA1609.severity = warning
+dotnet_diagnostic.SA1610.severity = warning
+dotnet_diagnostic.SA1611.severity = warning
+dotnet_diagnostic.SA1612.severity = warning
+dotnet_diagnostic.SA1613.severity = warning
+dotnet_diagnostic.SA1614.severity = warning
+dotnet_diagnostic.SA1615.severity = warning
+dotnet_diagnostic.SA1616.severity = warning
+dotnet_diagnostic.SA1617.severity = warning
+dotnet_diagnostic.SA1618.severity = warning
+dotnet_diagnostic.SA1619.severity = warning
+dotnet_diagnostic.SA1620.severity = warning
+dotnet_diagnostic.SA1621.severity = warning
+dotnet_diagnostic.SA1622.severity = warning
+dotnet_diagnostic.SA1623.severity = warning
+dotnet_diagnostic.SA1624.severity = warning
+dotnet_diagnostic.SA1625.severity = warning
+dotnet_diagnostic.SA1626.severity = warning
+dotnet_diagnostic.SA1627.severity = warning
+dotnet_diagnostic.SA1628.severity = warning
+dotnet_diagnostic.SA1629.severity = warning
+dotnet_diagnostic.SA1630.severity = warning
+dotnet_diagnostic.SA1631.severity = none
+dotnet_diagnostic.SA1632.severity = none
+dotnet_diagnostic.SA1633.severity = none
+dotnet_diagnostic.SA1634.severity = none
+dotnet_diagnostic.SA1635.severity = none
+dotnet_diagnostic.SA1636.severity = none
+dotnet_diagnostic.SA1637.severity = none
+dotnet_diagnostic.SA1638.severity = none
+dotnet_diagnostic.SA1639.severity = none
+dotnet_diagnostic.SA1640.severity = none
+dotnet_diagnostic.SA1641.severity = none
+dotnet_diagnostic.SA1642.severity = warning
+dotnet_diagnostic.SA1643.severity = warning
+dotnet_diagnostic.SA1648.severity = warning
+dotnet_diagnostic.SA1649.severity = none
+
+# Spacing
+dotnet_diagnostic.SA1005.severity = warning
+dotnet_diagnostic.SA1009.severity = warning
+dotnet_diagnostic.SA1025.severity = warning
+dotnet_diagnostic.SA1111.severity = warning

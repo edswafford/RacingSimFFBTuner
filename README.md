@@ -22,19 +22,19 @@ A Windows desktop application that reads real-time telemetry from racing simulat
 ## Development Environment
 
 - **Primary IDE**: Visual Studio Code (VS Code)
-- **Secondary IDE**: Visual Studio 2022 (for building and running)
+- **Secondary IDE**: Visual Studio 2026 (for building and running)
 - **Platform**: Windows only (no cross-platform support)
 
 ## Build Requirements
 
-- Visual Studio 2022
+- Visual Studio 2026
 - .NET 10.0 SDK
 - Windows 10/11
 
 ## Getting Started
 
 1. Clone the repository
-2. Open the solution in Visual Studio 2022 or VS Code
+2. Open the solution in Visual Studio 2026 or VS Code
 3. Restore NuGet packages
 4. Build the solution
 5. Run tests to verify the setup

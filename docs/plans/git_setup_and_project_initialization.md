@@ -33,7 +33,7 @@ Initialize Git repository with pre-commit validation hooks, create open-source p
 ## Project Constraints
 - **Windows-only project**: No cross-platform support required
 - **Primary IDE**: Visual Studio Code (VS Code) for most development
-- **Secondary IDE**: Visual Studio 2022 for building/running when needed
+- **Secondary IDE**: Visual Studio 2026 for building/running when needed
 - **Linter**: StyleCop Analyzers (configured for IDesign C# Coding Standard v3.01)
 
 ## Files to Create
@@ -57,15 +57,15 @@ Create a brief overview README that includes:
 - Project name and description
 - Key features (telemetry ingestion, FFB output, tuning UI)
 - Technology stack (.NET 10.0, WPF, MVVM, Clean Architecture)
-- Development environment (VS Code primary, Visual Studio 2022 compatible)
-- Build requirements (Visual Studio 2022, .NET 10.0, Windows only)
+- Development environment (VS Code primary, Visual Studio 2026 compatible)
+- Build requirements (Visual Studio 2026, .NET 10.0, Windows only)
 - License (GPL v3)
 - Brief getting started section
 
 ### 4. StyleCop Analyzers Configuration
 Install and configure StyleCop Analyzers to:
 - Enforce IDesign C# Coding Standard v3.01
-- Work seamlessly in both VS Code and Visual Studio 2022
+- Work seamlessly in both VS Code and Visual Studio 2026
 - Integrate with pre-commit hooks for automated validation
 - Provide real-time feedback during development
 
@@ -83,7 +83,7 @@ Create `.git/hooks/pre-commit` PowerShell script (Windows-only) that:
 
 **Implementation details:**
 - Use PowerShell for the pre-commit hook (Windows-native)
-- Run `dotnet build` on the solution (works with Visual Studio 2022 solutions)
+- Run `dotnet build` on the solution (works with Visual Studio 2026 solutions)
 - Run `dotnet test` on test projects
 - Check for linter/analyzer errors via build output
 - Exit with non-zero error code on failure to block commit
@@ -116,7 +116,7 @@ Create a step-by-step guide for:
 ### Pre-commit Hook Strategy
 Since the project structure doesn't exist yet, the hook will:
 - Check for `.sln` files in the root
-- Build using `dotnet build` (works with Visual Studio solutions)
+- Build using `dotnet build` (works with Visual Studio 2026 solutions)
 - Run tests using `dotnet test`
 - Linter validation will occur during build (Roslyn analyzers run as part of compilation)
 - Be designed to work once the solution is created

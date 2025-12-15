@@ -1,0 +1,82 @@
+# Cursor Rules for RacingSimFFB Project
+
+## Development Workflow: TDD + Linting Review Process
+
+This project follows **Test-Driven Development (TDD)** with a **collaborative linting review process**. Follow this workflow for each feature/test set:
+
+### Standard Development Cycle
+
+1. **Write Test and Code (TDD) - Agent Autonomous**
+   - Write the test first (Red)
+   - Write minimal code to make it pass (Green)
+   - Refactor if needed
+   - **Agent autonomously**: Build until no errors (`dotnet build`)
+   - **Agent autonomously**: Run tests until all pass (`dotnet test`)
+   - **Agent autonomously**: Cycle back to fix any build/test failures
+   - Only present final result to user when build is clean and all tests pass
+
+2. **User Review & Changes**
+   - User independently reviews the code
+   - User makes changes directly OR asks agent to make changes
+   - Agent should wait for user approval before proceeding
+
+3. **Verify Tests Still Pass - Agent Autonomous**
+   - After any changes, **agent autonomously**: Run `dotnet test` until green
+   - **Agent autonomously**: Fix any test failures and rebuild as needed
+   - Only present final result when all tests pass
+
+4. **Run Linter**
+   - Agent runs: `dotnet build` to see all linting warnings
+   - Agent presents linting warnings to user for review
+
+5. **Review Linting Warnings**
+   - User reviews each warning
+   - For warnings that don't improve readability:
+     - User decides to disable the rule in `.editorconfig`
+     - Agent disables the rule with a comment explaining why
+   - For warnings that should be fixed:
+     - **Agent autonomously**: Fix the warnings, rebuild, and verify fixes
+     - Present final result when warnings are resolved
+
+6. **Commit Process**
+   - Agent writes commit message following project conventions
+   - User reviews commit message
+   - User approves or requests changes
+   - Agent commits and pushes after approval
+
+### Key Principles
+
+- **TDD First**: Always write tests before implementation
+- **Agent Autonomy**: Agent should autonomously build, test, and fix until green before presenting to user
+- **User Has Final Say**: User reviews final code, linting warnings, and commit messages
+- **Readability Over Rules**: If a linting rule reduces readability, disable it
+- **Iterate Autonomously**: Don't ask for approval on intermediate build/test runs - only present final working result
+
+### Linting Rule Management
+
+- Rules can be disabled in `.editorconfig` with justification comments
+- Example: SA1515 disabled because blank lines before inline comments reduce readability
+- When disabling rules, add a comment explaining the rationale
+
+### Commands Reference
+
+```powershell
+# Build and see linting warnings
+dotnet build RacingSimFFB.sln
+
+# Run tests
+dotnet test RacingSimFFB.sln
+
+# Build with detailed output
+dotnet build --verbosity detailed RacingSimFFB.sln
+```
+
+### Project Standards
+
+- Follow **IDesign C# Coding Standard v3.01** (see `docs/IDesign C# Coding Standard.md`)
+- Use `.NET 10.0` and `xUnit` for testing
+- StyleCop Analyzers runs automatically during build
+- Private members use `_` prefix (not `this.`)
+- `var` allowed when type is apparent
+- Regions allowed for code organization
+

@@ -10,9 +10,9 @@ The first milestone is a **prototype shell** (mockup) — a minimal WPF app plus
 
 **Coding Standard:** IDesign C# Coding Standard Guidelines and Best Practices (v3.01)
 
-**IDE:** Visual Studio 2022
+**IDE:** Visual Studio 2026
 
-**Solution and Project files:** Visual Studio 2022, target .net 10.0
+**Solution and Project files:** Visual Studio 2026, target .net 10.0
 
 **Assemblies**: Separate per layer for strong separation and testability.
 

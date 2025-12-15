@@ -10,4 +10,3 @@ namespace RacingSimFFB.Presentation;
 public partial class App : Application
 {
 }
-
