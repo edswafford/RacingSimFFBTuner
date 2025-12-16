@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document provides a comprehensive analysis of all value objects identified from the legacy MarvinsAIRA codebase at `C:\dev\FFB\SimRacing\SimRacingFFB`. The analysis serves as the foundation for implementing value objects in the refactored RacingSimFFBTuner application using Test-Driven Development (TDD).
+This document provides a comprehensive analysis of all value objects identified from the legacy MarvinsAIRA codebase at [https://github.com/edswafford/SimRacingFFB](https://github.com/edswafford/SimRacingFFB). The analysis serves as the foundation for implementing value objects in the refactored RacingSimFFBTuner application using Test-Driven Development (TDD).
 
 **Important:** The Domain layer must never contain anything specific to a particular racing simulator. All value objects in this document are generic and can be used with any racing simulator (iRacing, Assetto Corsa, Automobilista, etc.). References to "iRacing" appear only when describing the legacy codebase.
 
@@ -118,7 +118,7 @@ Represents the vehicle's yaw rate (angular velocity around the vertical axis) in
 
 #### Usage in Legacy Code
 
-**Source (Legacy):** `src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs`
+**Source (Legacy):** [src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs](https://github.com/edswafford/SimRacingFFB/blob/main/src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs)
 
 **Field (Legacy):** `public float _irsdk_yawRate`
 - **Type:** `float`
@@ -194,7 +194,7 @@ Represents a 3D velocity vector with X (forward/backward), Y (left/right lateral
 
 #### Usage in Legacy Code
 
-**Source (Legacy):** `src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs`
+**Source (Legacy):** [src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs](https://github.com/edswafford/SimRacingFFB/blob/main/src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs)
 
 **Fields (Legacy):**
 - `_irsdk_velocityX` - Forward/backward velocity (not explicitly documented but used)
@@ -289,7 +289,7 @@ Represents the vehicle's speed (velocity magnitude) in meters per second. This i
 
 #### Usage in Legacy Code
 
-**Source (Legacy):** `src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs`
+**Source (Legacy):** [src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs](https://github.com/edswafford/SimRacingFFB/blob/main/src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs)
 
 **Calculation (Legacy):** Velocity magnitude calculated from `velocityX` and `velocityY`:
 ```csharp
@@ -389,7 +389,7 @@ Represents G-force (acceleration relative to Earth's gravity) calculated from ve
 
 #### Usage in Legacy Code
 
-**Source (Legacy):** `src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs`
+**Source (Legacy):** [src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs](https://github.com/edswafford/SimRacingFFB/blob/main/src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs)
 
 **Field (Legacy):** `public float _irsdk_gForce`
 - **Type:** `float`
@@ -464,7 +464,7 @@ Represents force feedback torque in Newton-meters (Nm). This is the primary inpu
 
 #### Usage in Legacy Code
 
-**Source (Legacy):** `src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs`
+**Source (Legacy):** [src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs](https://github.com/edswafford/SimRacingFFB/blob/main/src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs)
 
 **Field (Legacy):** `public float[] _irsdk_steeringWheelTorque_ST`
 - **Type:** `float[]`
@@ -539,7 +539,7 @@ Represents engine rotational speed in revolutions per minute (RPM).
 
 #### Usage in Legacy Code
 
-**Source (Legacy):** `src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs`
+**Source (Legacy):** [src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs](https://github.com/edswafford/SimRacingFFB/blob/main/src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs)
 
 **Field (Legacy):** `_irsdk_rpm` (referenced in HPR code)
 - Used for RPM-based pedal haptics
@@ -645,7 +645,7 @@ Represents suspension shock velocity in meters per second for a single corner of
 
 #### Usage in Legacy Code
 
-**Source (Legacy):** `src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs`
+**Source (Legacy):** [src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs](https://github.com/edswafford/SimRacingFFB/blob/main/src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs)
 
 **Fields (Legacy):** Arrays of 6 samples each at 360Hz:
 - `_irsdk_cfShockVel_ST` - Center Front
@@ -812,7 +812,7 @@ Represents the raw wheel position from hardware device in DirectInput units (typ
 
 #### Usage in Legacy Code
 
-**Source (Legacy):** `src/SimRacingFFB/Application/App.Inputs.cs`
+**Source (Legacy):** [src/SimRacingFFB/Application/App.Inputs.cs](https://github.com/edswafford/SimRacingFFB/blob/main/src/SimRacingFFB/Application/App.Inputs.cs)
 
 **Field (Legacy):** `public int Input_CurrentWheelPosition`
 - **Type:** `int`
@@ -879,7 +879,7 @@ Represents wheel velocity calculated from position delta over time in raw units 
 
 #### Usage in Legacy Code
 
-**Source (Legacy):** `src/SimRacingFFB/Application/App.Inputs.cs`
+**Source (Legacy):** [src/SimRacingFFB/Application/App.Inputs.cs](https://github.com/edswafford/SimRacingFFB/blob/main/src/SimRacingFFB/Application/App.Inputs.cs)
 
 **Field (Legacy):** `public int Input_CurrentWheelVelocity`
 - **Type:** `int`
@@ -1062,7 +1062,7 @@ Represents a scale factor as a percentage (0-100% or higher for over-scaling). U
 
 #### Usage in Legacy Code
 
-**Source (Legacy):** `src/SimRacingFFB/Application/App.ForceFeedback.cs`
+**Source (Legacy):** [src/SimRacingFFB/Application/App.ForceFeedback.cs](https://github.com/edswafford/SimRacingFFB/blob/main/src/SimRacingFFB/Application/App.ForceFeedback.cs)
 
 **Fields (Legacy):**
 - `Settings.OverallScale` - Overall FFB strength scale
@@ -1229,7 +1229,7 @@ Represents the yaw rate factor, which is a calculated metric indicating how much
 
 #### Usage in Legacy Code
 
-**Source (Legacy):** `src/SimRacingFFB/Application/App.ForceFeedback.cs`
+**Source (Legacy):** [src/SimRacingFFB/Application/App.ForceFeedback.cs](https://github.com/edswafford/SimRacingFFB/blob/main/src/SimRacingFFB/Application/App.ForceFeedback.cs)
 
 **Method (Legacy):** `UFF_ProcessYawRateFactor()`
 - **Synopsis:** Calculates the instant yaw rate factor (steering wheel angle * speed / yaw rate) which indicates how much steering input is required for a given yaw rate, used for understeer detection. Only calculates when yaw rate is significant (>= 5 degrees/second) and vehicle has forward velocity. Maintains a circular buffer of 120 samples (2 seconds at 60Hz) to calculate average yaw rate factor for skid pad analysis. The yaw rate factor is a key metric for detecting understeer conditions.
@@ -1340,7 +1340,7 @@ A composite value object representing an immutable snapshot of all telemetry dat
 
 #### Usage in Legacy Code
 
-**Source (Legacy):** `src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs`
+**Source (Legacy):** [src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs](https://github.com/edswafford/SimRacingFFB/blob/main/src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs)
 
 **Method (Legacy):** `OnTelemetryData()`
 - **Synopsis:** Main telemetry processing method called at 60Hz when the simulator sends telemetry updates. Reads all telemetry values including:
@@ -1558,7 +1558,7 @@ For each value object, TDD tests should cover:
 
 ## References
 
-- Legacy Codebase: `C:\dev\FFB\SimRacing\SimRacingFFB`
+- Legacy Codebase: [https://github.com/edswafford/SimRacingFFB](https://github.com/edswafford/SimRacingFFB)
 - Legacy Documentation: [LegacySimRacingFFB.md](../../LegacySimRacingFFB.md)
 - Design Document: [Racing Simulator Force Feedback Design.md](../../Racing%20Simulator%20Force%20Feedback%20Design.md)
 - Existing Implementation: `src/Domain/ValueObjects/SteeringWheelAngle.cs`
