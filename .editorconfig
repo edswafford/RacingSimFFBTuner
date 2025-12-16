@@ -423,3 +423,19 @@ dotnet_diagnostic.SA1005.severity = warning
 dotnet_diagnostic.SA1009.severity = warning
 dotnet_diagnostic.SA1025.severity = warning
 dotnet_diagnostic.SA1111.severity = warning
+
+# Test files - disable documentation requirements for test classes and methods
+# This applies to all .cs files in the tests directory
+[tests/**/*.cs]
+dotnet_diagnostic.SA1600.severity = none
+dotnet_diagnostic.SA1601.severity = none
+dotnet_diagnostic.SA1604.severity = none
+dotnet_diagnostic.SA1605.severity = none
+dotnet_diagnostic.SA1606.severity = none
+dotnet_diagnostic.SA1607.severity = none
+dotnet_diagnostic.SA1611.severity = none
+dotnet_diagnostic.SA1612.severity = none
+dotnet_diagnostic.SA1613.severity = none
+dotnet_diagnostic.SA1614.severity = none
+dotnet_diagnostic.SA1615.severity = none
+dotnet_diagnostic.SA1616.severity = none
