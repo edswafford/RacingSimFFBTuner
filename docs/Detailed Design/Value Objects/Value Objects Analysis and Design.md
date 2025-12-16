@@ -19,8 +19,8 @@ This document provides a comprehensive analysis of all value objects identified 
    - [EngineRPM](#enginerpm) ✅ COMPLETED
    - [ShockVelocity](#shockvelocity) ☐ COMPLETED
    - [TireLoad](#tireload) ☐ COMPLETED
-   - [WheelPosition](#wheelposition) ☐ COMPLETED
-   - [WheelVelocity](#wheelvelocity) ☐ COMPLETED
+   - [WheelPosition](#wheelposition) ✅ COMPLETED
+   - [WheelVelocity](#wheelvelocity) ✅ COMPLETED
    - [ForceFeedbackVector](#forcefeedbackvector) ☐ COMPLETED
    - [Scale](#scale) ☐ COMPLETED
    - [PidConfig](#pidconfig) ☐ COMPLETED
@@ -827,7 +827,7 @@ public readonly record struct TireLoad
 
 ### WheelPosition
 
-☐ **COMPLETED** - See `src/Domain/ValueObjects/WheelPosition.cs`
+✅ **COMPLETED** - See `src/Domain/ValueObjects/WheelPosition.cs`
 
 #### Description
 Represents the raw wheel position from hardware device in DirectInput units (typically -32768 to 32767).
@@ -894,7 +894,7 @@ public readonly record struct WheelPosition
 
 ### WheelVelocity
 
-☐ **COMPLETED** - See `src/Domain/ValueObjects/WheelVelocity.cs`
+✅ **COMPLETED** - See `src/Domain/ValueObjects/WheelVelocity.cs`
 
 #### Description
 Represents wheel velocity calculated from position delta over time in raw units per second.
