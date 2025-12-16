@@ -11,21 +11,21 @@ This document provides a comprehensive analysis of all value objects identified 
 1. [Overview and Implementation Strategy](#overview-and-implementation-strategy)
 2. [Value Objects by Category](#value-objects-by-category)
    - [SteeringWheelAngle](#steeringwheelangle) ✅ COMPLETED
-   - [YawRate](#yawrate)
-   - [Velocity](#velocity)
-   - [Speed](#speed)
-   - [GForce](#gforce)
-   - [Torque](#torque)
-   - [EngineRPM](#enginerpm)
-   - [ShockVelocity](#shockvelocity)
-   - [TireLoad](#tireload)
-   - [WheelPosition](#wheelposition)
-   - [WheelVelocity](#wheelvelocity)
-   - [ForceFeedbackVector](#forcefeedbackvector)
-   - [Scale](#scale)
-   - [PidConfig](#pidconfig)
-   - [YawRateFactor](#yawratefactor)
-   - [TelemetryDataPoint](#telemetrydatapoint)
+   - [YawRate](#yawrate) ☐ COMPLETED
+   - [Velocity](#velocity) ☐ COMPLETED
+   - [Speed](#speed) ☐ COMPLETED
+   - [GForce](#gforce) ☐ COMPLETED
+   - [Torque](#torque) ☐ COMPLETED
+   - [EngineRPM](#enginerpm) ☐ COMPLETED
+   - [ShockVelocity](#shockvelocity) ☐ COMPLETED
+   - [TireLoad](#tireload) ☐ COMPLETED
+   - [WheelPosition](#wheelposition) ☐ COMPLETED
+   - [WheelVelocity](#wheelvelocity) ☐ COMPLETED
+   - [ForceFeedbackVector](#forcefeedbackvector) ☐ COMPLETED
+   - [Scale](#scale) ☐ COMPLETED
+   - [PidConfig](#pidconfig) ☐ COMPLETED
+   - [YawRateFactor](#yawratefactor) ☐ COMPLETED
+   - [TelemetryDataPoint](#telemetrydatapoint) ☐ COMPLETED
 3. [Implementation Recommendations](#implementation-recommendations)
 4. [Challenges and Solutions](#challenges-and-solutions)
 
@@ -105,142 +105,13 @@ For each value object, TDD tests should cover:
 
 ✅ **COMPLETED** - See `src/Domain/ValueObjects/SteeringWheelAngle.cs`
 
-#### Description
-
-Represents the steering wheel angle in radians with maximum steering lock validation. The angle must be within the range of ±maxRadians, where maxRadians represents the maximum steering lock of the vehicle. This value object is immutable and ensures the steering angle is always within physical limits.
-
-#### Usage in Legacy Code
-
-**Source (Legacy):** `src/SimRacingFFB/Simulators/IRacing/App.IRacingSDK.cs`
-
-**Field (Legacy):** `public float _irsdk_steeringWheelAngle`
-- **Type:** `float`
-- **Synopsis:** Current steering wheel angle in radians. Used for understeer calculation (yaw rate factor), soft lock forces, and auto-center wheel feature.
-
-**Used in (Legacy):**
-- `UFF_ProcessYawRateFactor()` - Calculates yaw rate factor: `steering wheel angle * speed / yaw rate` for understeer detection
-- Soft lock forces - Provides resistance at steering limits
-- Auto-center wheel feature - Centers the physical wheel when not on track
-
-**Reference:** [LegacySimRacingFFB.md](../../LegacySimRacingFFB.md) (line 256-258)
-
-#### Validation Rules
-
-1. **Range:** Must be between -maxRadians and +maxRadians (inclusive)
-2. **MaxRadians:** Must be greater than zero
-3. **Invalid values:** Reject NaN and Infinity for both radians and maxRadians
-4. **Units:** Radians
-
-#### TDD Test Requirements
-
-##### Valid Construction
-- ✅ Create with positive value within range
-- ✅ Create with negative value within range
-- ✅ Create with zero value
-- ✅ Create at maximum boundary (+maxRadians)
-- ✅ Create at minimum boundary (-maxRadians)
-- ✅ Create with very small values
-- ✅ Create with very small maxRadians
-
-##### Invalid Inputs
-- ❌ Radians exceeding maxRadians should throw ArgumentOutOfRangeException
-- ❌ Radians less than -maxRadians should throw ArgumentOutOfRangeException
-- ❌ NaN radians should throw ArgumentException
-- ❌ PositiveInfinity radians should throw ArgumentException
-- ❌ NegativeInfinity radians should throw ArgumentException
-- ❌ MaxRadians <= 0 should throw ArgumentOutOfRangeException
-- ❌ NaN maxRadians should throw ArgumentException
-- ❌ Infinity maxRadians should throw ArgumentException
-
-##### Equality
-- ✅ Two instances with same radians and maxRadians are equal
-- ✅ Two instances with different radians are not equal
-- ✅ Two instances with different maxRadians are not equal
-- ✅ GetHashCode returns same value for equal instances
-
-##### Conversion Methods
-- ✅ `ToDegrees()` - Converts radians to degrees
-- ✅ `FromDegrees()` - Creates instance from degrees with validation
-
-#### Implementation Recommendations
-
-```csharp
-public readonly record struct SteeringWheelAngle
-{
-    public float Radians { get; init; }
-    public float MaxRadians { get; init; }
-    
-    public SteeringWheelAngle(float radians, float maxRadians)
-    {
-        ValidateMaxRadians(maxRadians);
-        ValidateRadians(radians, maxRadians);
-        
-        Radians = radians;
-        MaxRadians = maxRadians;
-    }
-    
-    public float ToDegrees() => Radians * 180f / MathF.PI;
-    
-    public static SteeringWheelAngle FromDegrees(float degrees, float maxRadians)
-    {
-        var maxDegrees = maxRadians * 180f / MathF.PI;
-        
-        if (float.IsNaN(degrees) || float.IsInfinity(degrees))
-        {
-            throw new ArgumentException("Degrees cannot be NaN or Infinity.", nameof(degrees));
-        }
-        
-        if (MathF.Abs(degrees) > maxDegrees)
-        {
-            throw new ArgumentOutOfRangeException(
-                nameof(degrees),
-                degrees,
-                $"Degrees must be between -{maxDegrees} and +{maxDegrees}.");
-        }
-        
-        var radians = degrees * MathF.PI / 180f;
-        return new SteeringWheelAngle(radians, maxRadians);
-    }
-    
-    private static void ValidateMaxRadians(float maxRadians)
-    {
-        if (float.IsNaN(maxRadians) || float.IsInfinity(maxRadians))
-        {
-            throw new ArgumentException("MaxRadians cannot be NaN or Infinity.", nameof(maxRadians));
-        }
-        
-        if (maxRadians <= 0f)
-        {
-            throw new ArgumentOutOfRangeException(
-                nameof(maxRadians),
-                maxRadians,
-                "MaxRadians must be greater than zero.");
-        }
-    }
-    
-    private static void ValidateRadians(float radians, float maxRadians)
-    {
-        if (float.IsNaN(radians) || float.IsInfinity(radians))
-        {
-            throw new ArgumentException("Radians cannot be NaN or Infinity.", nameof(radians));
-        }
-        
-        if (MathF.Abs(radians) > maxRadians)
-        {
-            throw new ArgumentOutOfRangeException(
-                nameof(radians),
-                radians,
-                $"Radians must be between -{maxRadians} and +{maxRadians}.");
-        }
-    }
-}
-```
-
 **Priority:** Phase 1, #1
 
 ---
 
 ### YawRate
+
+☐ **COMPLETED** - See `src/Domain/ValueObjects/YawRate.cs`
 
 #### Description
 Represents the vehicle's yaw rate (angular velocity around the vertical axis) in radians per second. Positive values indicate rotation to the right, negative to the left.
@@ -315,6 +186,8 @@ public readonly record struct YawRate
 ---
 
 ### Velocity
+
+☐ **COMPLETED** - See `src/Domain/ValueObjects/Velocity.cs`
 
 #### Description
 Represents a 3D velocity vector with X (forward/backward), Y (left/right lateral), and Z (up/down) components in meters per second.
@@ -408,6 +281,8 @@ public readonly record struct Velocity
 ---
 
 ### Speed
+
+☐ **COMPLETED** - See `src/Domain/ValueObjects/Speed.cs`
 
 #### Description
 Represents the vehicle's speed (velocity magnitude) in meters per second. This is a scalar value derived from the velocity vector.
@@ -507,6 +382,8 @@ public readonly record struct Speed
 
 ### GForce
 
+☐ **COMPLETED** - See `src/Domain/ValueObjects/GForce.cs`
+
 #### Description
 Represents G-force (acceleration relative to Earth's gravity) calculated from velocity change over time. Used for crash protection detection.
 
@@ -580,6 +457,8 @@ public readonly record struct GForce
 
 ### Torque
 
+☐ **COMPLETED** - See `src/Domain/ValueObjects/Torque.cs`
+
 #### Description
 Represents force feedback torque in Newton-meters (Nm). This is the primary input for FFB calculation.
 
@@ -652,6 +531,8 @@ public readonly record struct Torque
 ---
 
 ### EngineRPM
+
+☐ **COMPLETED** - See `src/Domain/ValueObjects/EngineRPM.cs`
 
 #### Description
 Represents engine rotational speed in revolutions per minute (RPM).
@@ -757,6 +638,8 @@ public readonly record struct EngineRPM
 
 ### ShockVelocity
 
+☐ **COMPLETED** - See `src/Domain/ValueObjects/ShockVelocity.cs`
+
 #### Description
 Represents suspension shock velocity in meters per second for a single corner of the vehicle.
 
@@ -833,6 +716,8 @@ public readonly record struct ShockVelocity
 ---
 
 ### TireLoad
+
+☐ **COMPLETED** - See `src/Domain/ValueObjects/TireLoad.cs`
 
 #### Description
 Represents the current force/load on a single tire in Newtons, along with the slip ratio (unitless).
@@ -920,6 +805,8 @@ public readonly record struct TireLoad
 
 ### WheelPosition
 
+☐ **COMPLETED** - See `src/Domain/ValueObjects/WheelPosition.cs`
+
 #### Description
 Represents the raw wheel position from hardware device in DirectInput units (typically -32768 to 32767).
 
@@ -985,6 +872,8 @@ public readonly record struct WheelPosition
 
 ### WheelVelocity
 
+☐ **COMPLETED** - See `src/Domain/ValueObjects/WheelVelocity.cs`
+
 #### Description
 Represents wheel velocity calculated from position delta over time in raw units per second.
 
@@ -1039,6 +928,8 @@ public readonly record struct WheelVelocity
 ---
 
 ### ForceFeedbackVector
+
+☐ **COMPLETED** - See `src/Domain/ValueObjects/ForceFeedbackVector.cs`
 
 #### Description
 Represents a 3D force feedback vector with X, Y, Z components, plus damper and inertia values to be applied to the wheel.
@@ -1164,6 +1055,8 @@ public readonly record struct ForceFeedbackVector
 
 ### Scale
 
+☐ **COMPLETED** - See `src/Domain/ValueObjects/Scale.cs`
+
 #### Description
 Represents a scale factor as a percentage (0-100% or higher for over-scaling). Used for FFB overall scale, detail scale, and LFE scale.
 
@@ -1254,6 +1147,8 @@ public readonly record struct Scale
 
 ### PidConfig
 
+☐ **COMPLETED** - See `src/Domain/ValueObjects/PidConfig.cs`
+
 #### Description
 Represents PID (Proportional, Integral, Derivative) controller configuration parameters for FFB algorithm tuning.
 
@@ -1324,6 +1219,8 @@ public readonly record struct PidConfig
 ---
 
 ### YawRateFactor
+
+☐ **COMPLETED** - See `src/Domain/ValueObjects/YawRateFactor.cs`
 
 #### Description
 Represents the yaw rate factor, which is a calculated metric indicating how much steering input is required for a given yaw rate. Used for understeer detection. Formula: `steering wheel angle * speed / yaw rate`.
@@ -1435,6 +1332,8 @@ public readonly record struct YawRateFactor
 ---
 
 ### TelemetryDataPoint
+
+☐ **COMPLETED** - See `src/Domain/ValueObjects/TelemetryDataPoint.cs`
 
 #### Description
 A composite value object representing an immutable snapshot of all telemetry data at a specific moment. This aggregates multiple value objects into a single cohesive unit.
