@@ -12,11 +12,11 @@ This document provides a comprehensive analysis of all value objects identified 
 2. [Value Objects by Category](#value-objects-by-category)
    - [SteeringWheelAngle](#steeringwheelangle) ✅ COMPLETED
    - [YawRate](#yawrate) ✅ COMPLETED
-   - [Velocity](#velocity) ☐ COMPLETED
-   - [Speed](#speed) ☐ COMPLETED
-   - [GForce](#gforce) ☐ COMPLETED
-   - [Torque](#torque) ☐ COMPLETED
-   - [EngineRPM](#enginerpm) ☐ COMPLETED
+   - [Velocity](#velocity) ✅ COMPLETED
+   - [Speed](#speed) ✅ COMPLETED
+   - [GForce](#gforce) ✅ COMPLETED
+   - [Torque](#torque) ✅ COMPLETED
+   - [EngineRPM](#enginerpm) ✅ COMPLETED
    - [ShockVelocity](#shockvelocity) ☐ COMPLETED
    - [TireLoad](#tireload) ☐ COMPLETED
    - [WheelPosition](#wheelposition) ☐ COMPLETED
@@ -40,11 +40,11 @@ Following the TDD approach and dependency analysis, value objects should be impl
 #### Phase 1: Foundation (Generic, No Dependencies)
 1. ✅ **SteeringWheelAngle** - COMPLETED
 2. ✅ **YawRate** - COMPLETED - Angular velocity (radians/second)
-3. **Speed** - Velocity magnitude
-4. **Torque** - Force feedback torque in Newton-meters
-5. **Velocity** - 3D velocity vector (X, Y, Z components)
-6. **GForce** - Calculated from velocity change
-7. **EngineRPM** - Engine rotational speed
+3. ✅ **Speed** - COMPLETED - Velocity magnitude
+4. ✅ **Torque** - COMPLETED - Force feedback torque in Newton-meters
+5. ✅ **Velocity** - COMPLETED - 3D velocity vector (X, Y, Z components)
+6. ✅ **GForce** - COMPLETED - Calculated from velocity change
+7. ✅ **EngineRPM** - COMPLETED - Engine rotational speed
 
 #### Phase 2: Telemetry Components (Depend on Phase 1)
 8. **ShockVelocity** - Suspension shock velocity per corner
@@ -187,7 +187,7 @@ public readonly record struct YawRate
 
 ### Velocity
 
-☐ **COMPLETED** - See `src/Domain/ValueObjects/Velocity.cs`
+✅ **COMPLETED** - See `src/Domain/ValueObjects/Velocity.cs`
 
 #### Description
 Represents a 3D velocity vector with X (forward/backward), Y (left/right lateral), and Z (up/down) components in meters per second.
@@ -282,7 +282,7 @@ public readonly record struct Velocity
 
 ### Speed
 
-☐ **COMPLETED** - See `src/Domain/ValueObjects/Speed.cs`
+✅ **COMPLETED** - See `src/Domain/ValueObjects/Speed.cs`
 
 #### Description
 Represents the vehicle's speed (velocity magnitude) in meters per second. This is a scalar value derived from the velocity vector.
@@ -382,7 +382,7 @@ public readonly record struct Speed
 
 ### GForce
 
-☐ **COMPLETED** - See `src/Domain/ValueObjects/GForce.cs`
+✅ **COMPLETED** - See `src/Domain/ValueObjects/GForce.cs`
 
 #### Description
 Represents G-force (acceleration relative to Earth's gravity) calculated from velocity change over time. Used for crash protection detection.
@@ -457,7 +457,7 @@ public readonly record struct GForce
 
 ### Torque
 
-☐ **COMPLETED** - See `src/Domain/ValueObjects/Torque.cs`
+✅ **COMPLETED** - See `src/Domain/ValueObjects/Torque.cs`
 
 #### Description
 Represents force feedback torque in Newton-meters (Nm). This is the primary input for FFB calculation.
@@ -532,7 +532,7 @@ public readonly record struct Torque
 
 ### EngineRPM
 
-☐ **COMPLETED** - See `src/Domain/ValueObjects/EngineRPM.cs`
+✅ **COMPLETED** - See `src/Domain/ValueObjects/EngineRPM.cs`
 
 #### Description
 Represents engine rotational speed in revolutions per minute (RPM).
