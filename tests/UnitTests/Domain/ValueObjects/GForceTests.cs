@@ -5,6 +5,7 @@ namespace RacingSimFFB.Tests.UnitTests.Domain.ValueObjects;
 public class GForceTests
 {
     private const float Tolerance = 0.0001f;
+    private const float MaxGForce = 32f;
 
     #region Construction Tests
 
@@ -222,10 +223,10 @@ public class GForceTests
     }
 
     [Fact]
-    public void Constructor_WithVeryLargePositiveValue_ShouldCreateInstance()
+    public void Constructor_WithMaxPositiveValue_ShouldCreateInstance()
     {
         // Arrange
-        var value = 100f; // Extreme crash scenario
+        var value = MaxGForce; // Maximum allowed G-force
 
         // Act
         var gForce = new GForce(value);
@@ -235,16 +236,98 @@ public class GForceTests
     }
 
     [Fact]
-    public void Constructor_WithVeryLargeNegativeValue_ShouldCreateInstance()
+    public void Constructor_WithMaxNegativeValue_ShouldCreateInstance()
     {
         // Arrange
-        var value = -100f; // Extreme deceleration
+        var value = -MaxGForce; // Maximum allowed negative G-force
 
         // Act
         var gForce = new GForce(value);
 
         // Assert
         Assert.Equal(value, gForce.Value, Tolerance);
+    }
+
+    [Fact]
+    public void Constructor_WithValueJustBelowMaxPositive_ShouldCreateInstance()
+    {
+        // Arrange
+        var value = MaxGForce - 0.1f;
+
+        // Act
+        var gForce = new GForce(value);
+
+        // Assert
+        Assert.Equal(value, gForce.Value, Tolerance);
+    }
+
+    [Fact]
+    public void Constructor_WithValueJustAboveMaxNegative_ShouldCreateInstance()
+    {
+        // Arrange
+        var value = -MaxGForce + 0.1f;
+
+        // Act
+        var gForce = new GForce(value);
+
+        // Assert
+        Assert.Equal(value, gForce.Value, Tolerance);
+    }
+
+    #endregion
+
+    #region Range Validation Tests
+
+    [Fact]
+    public void Constructor_WithValueExceedingMaxPositive_ShouldThrowArgumentOutOfRangeException()
+    {
+        // Arrange
+        var value = MaxGForce + 0.1f;
+
+        // Act & Assert
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+            new GForce(value));
+
+        Assert.Equal("value", exception.ParamName);
+    }
+
+    [Fact]
+    public void Constructor_WithValueExceedingMaxNegative_ShouldThrowArgumentOutOfRangeException()
+    {
+        // Arrange
+        var value = -MaxGForce - 0.1f;
+
+        // Act & Assert
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+            new GForce(value));
+
+        Assert.Equal("value", exception.ParamName);
+    }
+
+    [Fact]
+    public void Constructor_WithVeryLargePositiveValue_ShouldThrowArgumentOutOfRangeException()
+    {
+        // Arrange
+        var value = 100f; // Extreme crash scenario - exceeds safety limit
+
+        // Act & Assert
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+            new GForce(value));
+
+        Assert.Equal("value", exception.ParamName);
+    }
+
+    [Fact]
+    public void Constructor_WithVeryLargeNegativeValue_ShouldThrowArgumentOutOfRangeException()
+    {
+        // Arrange
+        var value = -100f; // Extreme deceleration - exceeds safety limit
+
+        // Act & Assert
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+            new GForce(value));
+
+        Assert.Equal("value", exception.ParamName);
     }
 
     #endregion

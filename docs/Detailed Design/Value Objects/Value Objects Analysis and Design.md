@@ -408,7 +408,7 @@ Represents G-force (acceleration relative to Earth's gravity) calculated from ve
 
 #### Validation Rules
 
-1. **Range:** No specific upper limit (can be very high during crashes)
+1. **Range:** Must be between -32 and +32 G-forces (safety limit)
 2. **Invalid values:** Reject NaN and Infinity
 3. **Units:** G-forces (multiples of Earth's gravity, 9.81 m/s²)
 
@@ -418,12 +418,16 @@ Represents G-force (acceleration relative to Earth's gravity) calculated from ve
 - ✅ Create with zero (no acceleration)
 - ✅ Create with positive value (acceleration in one direction)
 - ✅ Create with negative value (deceleration)
-- ✅ Create with large positive value (crash scenario)
-- ✅ Create with large negative value (hard braking)
+- ✅ Create with maximum positive value (32 G-forces)
+- ✅ Create with maximum negative value (-32 G-forces)
+- ✅ Create with value just below maximum (31.9 G-forces)
+- ✅ Create with value just above minimum (-31.9 G-forces)
 
 ##### Invalid Inputs
 - ❌ NaN should throw ArgumentException
 - ❌ Infinity should throw ArgumentException
+- ❌ Value exceeding +32 G-forces should throw ArgumentOutOfRangeException
+- ❌ Value below -32 G-forces should throw ArgumentOutOfRangeException
 
 ##### Equality
 - ✅ Two instances with same value are equal
@@ -433,6 +437,8 @@ Represents G-force (acceleration relative to Earth's gravity) calculated from ve
 ```csharp
 public readonly record struct GForce
 {
+    public const float MaxGForce = 32f;
+    
     public float Value { get; init; }  // In G-forces (multiples of 9.81 m/s²)
     
     public GForce(float value)
@@ -446,6 +452,22 @@ public readonly record struct GForce
         if (float.IsNaN(value) || float.IsInfinity(value))
         {
             throw new ArgumentException("Value cannot be NaN or Infinity.", nameof(value));
+        }
+        
+        if (value > MaxGForce)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(value),
+                value,
+                $"Value must be less than or equal to {MaxGForce} G-forces.");
+        }
+        
+        if (value < -MaxGForce)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(value),
+                value,
+                $"Value must be greater than or equal to {-MaxGForce} G-forces.");
         }
     }
 }
