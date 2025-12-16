@@ -80,3 +80,15 @@ dotnet build --verbosity detailed RacingSimFFB.sln
 - `var` allowed when type is apparent
 - Regions allowed for code organization
 
+### Code Pattern Guidelines
+
+- **Follow Existing Patterns**: When creating new code (especially value objects, entities, etc.), use existing implementations as templates
+- **Value Objects**: Follow the pattern established in `SteeringWheelAngle.cs`:
+  - Properties first (IDesign ordering)
+  - Constructor after properties
+  - Public methods before private validation methods
+  - XML documentation comments (even though SA0001 is disabled, existing code has them)
+  - File ends with single newline (SA1518)
+- **Consistency**: Match the structure, naming, and style of similar existing code
+- **Reference Examples**: Before implementing, review similar existing code in the codebase
+
