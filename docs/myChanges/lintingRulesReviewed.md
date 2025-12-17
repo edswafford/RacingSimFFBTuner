@@ -44,6 +44,16 @@ Opening curly brackets should not be followed by blank lines to maintain consist
 
 Closing curly brackets should not be preceded by blank lines to maintain consistent code formatting and improve readability.
 
+### **SA1202**: Public members should come before private members
+**Rationale:** IDesign is agnostic; rule improves consistency and discoverability.
+
+Within each element type (fields, properties, methods), public members should appear before private members. This improves code discoverability by showing the public API first. IDesign specifies element type ordering (members → properties → constructors → methods) but is agnostic about public/private ordering within each type.
+
+### **SA1413**: Use trailing comma in multi-line initializers
+**Rationale:** Improves git diff readability and makes adding new items easier.
+
+Multi-line initializers (arrays, object initializers, collection initializers) should include a trailing comma after the last element. This produces cleaner git diffs when adding new items and maintains consistent formatting.
+
 ### **SA1518**: File is required to end with a single newline character
 **Rationale:** Widely accepted standard (POSIX/Unix convention).
 

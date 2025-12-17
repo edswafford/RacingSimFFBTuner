@@ -4,55 +4,6 @@ namespace RacingSimFFB.Tests.UnitTests.Domain.ValueObjects;
 
 public class TelemetryDataPointTests
 {
-    private static TelemetryDataPoint CreateValidTelemetryDataPoint(
-        DateTime? timestamp = null,
-        bool isOnTrack = true,
-        int gear = 0,
-        float throttle = 0f,
-        float brake = 0f)
-    {
-        var steeringWheelAngle = new SteeringWheelAngle(0.1f, MathF.PI);
-        var yawRate = new YawRate(0.2f);
-        var velocity = new Velocity(20f, 1f, 0f);
-        var speed = new Speed(20.025f);
-        var gForce = new GForce(1.5f);
-        var engineRPM = new EngineRPM(5000f);
-        var torqueSamples = new Torque[]
-        {
-            new Torque(1.0f),
-            new Torque(1.1f),
-            new Torque(1.2f),
-            new Torque(1.3f),
-            new Torque(1.4f),
-            new Torque(1.5f),
-        };
-        var shockVelocities = new ShockVelocity[]
-        {
-            new ShockVelocity(0.1f),
-            new ShockVelocity(0.2f),
-            new ShockVelocity(0.3f),
-            new ShockVelocity(0.4f),
-            new ShockVelocity(0.5f),
-            new ShockVelocity(0.6f),
-        };
-        var actualTimestamp = timestamp ?? DateTime.UtcNow;
-
-        return new TelemetryDataPoint(
-            steeringWheelAngle,
-            yawRate,
-            velocity,
-            speed,
-            gForce,
-            engineRPM,
-            torqueSamples,
-            shockVelocities,
-            actualTimestamp,
-            isOnTrack,
-            gear,
-            throttle,
-            brake);
-    }
-
     #region Construction Tests
 
     [Fact]
@@ -175,7 +126,7 @@ public class TelemetryDataPointTests
             new ShockVelocity(0.3f),
             new ShockVelocity(0.4f),
             new ShockVelocity(0.5f),
-            new ShockVelocity(0.6f)
+            new ShockVelocity(0.6f),
         };
         var timestamp = DateTime.UtcNow;
 
@@ -210,7 +161,7 @@ public class TelemetryDataPointTests
             new Torque(1.2f),
             new Torque(1.3f),
             new Torque(1.4f),
-            new Torque(1.5f)
+            new Torque(1.5f),
         };
         ShockVelocity[]? shockVelocities = null;
         var timestamp = DateTime.UtcNow;
@@ -247,7 +198,7 @@ public class TelemetryDataPointTests
             new ShockVelocity(0.3f),
             new ShockVelocity(0.4f),
             new ShockVelocity(0.5f),
-            new ShockVelocity(0.6f)
+            new ShockVelocity(0.6f),
         };
         var timestamp = DateTime.UtcNow;
 
@@ -285,7 +236,7 @@ public class TelemetryDataPointTests
             new Torque(1.2f),
             new Torque(1.3f),
             new Torque(1.4f),
-            new Torque(1.5f)
+            new Torque(1.5f),
         };
         var shockVelocities = new ShockVelocity[] { new ShockVelocity(0.1f) }; // Wrong length
         var timestamp = DateTime.UtcNow;
@@ -612,7 +563,7 @@ public class TelemetryDataPointTests
             new ShockVelocity(0.3f),
             new ShockVelocity(0.4f),
             new ShockVelocity(0.5f),
-            new ShockVelocity(0.6f)
+            new ShockVelocity(0.6f),
         };
         var timestamp = DateTime.UtcNow;
 
@@ -650,7 +601,7 @@ public class TelemetryDataPointTests
             new Torque(1.3f),
             new Torque(1.4f),
             new Torque(1.5f),
-            new Torque(1.6f) // Too many
+            new Torque(1.6f), // Too many
         };
         var shockVelocities = new ShockVelocity[]
         {
@@ -659,7 +610,7 @@ public class TelemetryDataPointTests
             new ShockVelocity(0.3f),
             new ShockVelocity(0.4f),
             new ShockVelocity(0.5f),
-            new ShockVelocity(0.6f)
+            new ShockVelocity(0.6f),
         };
         var timestamp = DateTime.UtcNow;
 
@@ -677,6 +628,59 @@ public class TelemetryDataPointTests
                 timestamp));
 
         Assert.Contains("SteeringWheelTorqueSamples must contain exactly 6 samples", exception.Message);
+    }
+
+    #endregion
+
+    #region Private Helper Methods
+
+    private static TelemetryDataPoint CreateValidTelemetryDataPoint(
+        DateTime? timestamp = null,
+        bool isOnTrack = true,
+        int gear = 0,
+        float throttle = 0f,
+        float brake = 0f)
+    {
+        var steeringWheelAngle = new SteeringWheelAngle(0.1f, MathF.PI);
+        var yawRate = new YawRate(0.2f);
+        var velocity = new Velocity(20f, 1f, 0f);
+        var speed = new Speed(20.025f);
+        var gForce = new GForce(1.5f);
+        var engineRPM = new EngineRPM(5000f);
+        var torqueSamples = new Torque[]
+        {
+            new Torque(1.0f),
+            new Torque(1.1f),
+            new Torque(1.2f),
+            new Torque(1.3f),
+            new Torque(1.4f),
+            new Torque(1.5f),
+        };
+        var shockVelocities = new ShockVelocity[]
+        {
+            new ShockVelocity(0.1f),
+            new ShockVelocity(0.2f),
+            new ShockVelocity(0.3f),
+            new ShockVelocity(0.4f),
+            new ShockVelocity(0.5f),
+            new ShockVelocity(0.6f),
+        };
+        var actualTimestamp = timestamp ?? DateTime.UtcNow;
+
+        return new TelemetryDataPoint(
+            steeringWheelAngle,
+            yawRate,
+            velocity,
+            speed,
+            gForce,
+            engineRPM,
+            torqueSamples,
+            shockVelocities,
+            actualTimestamp,
+            isOnTrack,
+            gear,
+            throttle,
+            brake);
     }
 
     #endregion

@@ -89,6 +89,8 @@ dotnet build --verbosity detailed RacingSimFFB.sln
   - Public methods before private validation methods
   - XML documentation comments (even though SA0001 is disabled, existing code has them)
   - File ends with single newline (SA1518)
+  - Use trailing comma in multi-line initializers (SA1413)
+  - Public members before private members within each element type (SA1202)
 - **Consistency**: Match the structure, naming, and style of similar existing code
 - **Reference Examples**: Before implementing, review similar existing code in the codebase
 
