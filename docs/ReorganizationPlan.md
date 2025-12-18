@@ -26,46 +26,48 @@ This plan reorganizes the `docs/` directory to create a clean, navigable documen
 ```
 c:\dev\SimRacingApps\RacingSimFFBTuner\
 ├── docs\
-│   ├── README.md (NEW - main entry point)
-│   ├── Domain\
-│   │   ├── Entities\
-│   │   │   └── Entities.md
-│   │   ├── ValueObjects\
-│   │   │   └── ValueObjects.md (transformed from Value Objects Analysis and Design.md)
-│   │   ├── Interfaces\
-│   │   │   └── Interfaces.md
-│   │   ├── DomainServices\
-│   │   │   └── DomainServices.md
-│   │   └── ConnectionManagementService\
-│   │       └── ConnectionManagementService.md
-│   ├── Application\
-│   │   └── UseCases\
-│   │       ├── RealTimeTelemetryAndForceFeedback\
-│   │       │   └── RealTimeTelemetryAndForceFeedback.md
-│   │       ├── StopForceFeedback\
-│   │       │   └── StopForceFeedback.md
-│   │       ├── LoadForceFeedbackProfile\
-│   │       │   └── LoadForceFeedbackProfile.md
-│   │       ├── SaveForceFeedbackProfile\
-│   │       │   └── SaveForceFeedbackProfile.md
-│   │       └── AnalyzeLapTimes\
-│   │           └── AnalyzeLapTimes.md
-│   ├── Infrastructure\
-│   │   ├── Gateways\
-│   │   │   └── Gateways.md
-│   │   ├── Persistence\
-│   │   │   └── Persistence.md
-│   │   ├── HardwareOutput\
-│   │   │   └── HardwareOutput.md
-│   │   └── Utilities\
-│   │       └── Utilities.md
-│   ├── Presentation\
-│   │   ├── UserInterface\
-│   │   │   └── UserInterface.md
-│   │   ├── ViewModels\
-│   │   │   └── ViewModels.md
-│   │   └── CompositionRoot\
-│   │       └── CompositionRoot.md
+│   ├── README.md (NEW - main entry point for docs directory)
+│   ├── Architecture\
+│   │   ├── Racing Simulator Force Feedback Architecture.md
+│   │   ├── Domain\
+│   │   │   ├── Entities\
+│   │   │   │   └── Entities.md
+│   │   │   ├── ValueObjects\
+│   │   │   │   └── ValueObjects.md (transformed from Value Objects Analysis and Design.md)
+│   │   │   ├── Interfaces\
+│   │   │   │   └── Interfaces.md
+│   │   │   ├── DomainServices\
+│   │   │   │   └── DomainServices.md
+│   │   │   └── ConnectionManagementService\
+│   │   │       └── ConnectionManagementService.md
+│   │   ├── Application\
+│   │   │   └── UseCases\
+│   │   │       ├── RealTimeTelemetryAndForceFeedback\
+│   │   │       │   └── RealTimeTelemetryAndForceFeedback.md
+│   │   │       ├── StopForceFeedback\
+│   │   │       │   └── StopForceFeedback.md
+│   │   │       ├── LoadForceFeedbackProfile\
+│   │   │       │   └── LoadForceFeedbackProfile.md
+│   │   │       ├── SaveForceFeedbackProfile\
+│   │   │       │   └── SaveForceFeedbackProfile.md
+│   │   │       └── AnalyzeLapTimes\
+│   │   │           └── AnalyzeLapTimes.md
+│   │   ├── Infrastructure\
+│   │   │   ├── Gateways\
+│   │   │   │   └── Gateways.md
+│   │   │   ├── Persistence\
+│   │   │   │   └── Persistence.md
+│   │   │   ├── HardwareOutput\
+│   │   │   │   └── HardwareOutput.md
+│   │   │   └── Utilities\
+│   │   │       └── Utilities.md
+│   │   └── Presentation\
+│   │       ├── UserInterface\
+│   │       │   └── UserInterface.md
+│   │       ├── ViewModels\
+│   │       │   └── ViewModels.md
+│   │       └── CompositionRoot\
+│   │           └── CompositionRoot.md
 │   ├── AI\
 │   │   ├── prompts\
 │   │   │   ├── Ai coding prompt guide.md
@@ -109,25 +111,32 @@ c:\dev\SimRacingApps\RacingSimFFBTuner\
 
 ### 1.1 Create Main Documentation Directories
 
-Create the following directories under `docs/`:
+**Status:** ✅ Architecture directory structure created
 
-- `docs/Domain/Entities/`
-- `docs/Domain/ValueObjects/`
-- `docs/Domain/Interfaces/`
-- `docs/Domain/DomainServices/`
-- `docs/Domain/ConnectionManagementService/`
-- `docs/Application/UseCases/RealTimeTelemetryAndForceFeedback/`
-- `docs/Application/UseCases/StopForceFeedback/`
-- `docs/Application/UseCases/LoadForceFeedbackProfile/`
-- `docs/Application/UseCases/SaveForceFeedbackProfile/`
-- `docs/Application/UseCases/AnalyzeLapTimes/`
-- `docs/Infrastructure/Gateways/`
-- `docs/Infrastructure/Persistence/`
-- `docs/Infrastructure/HardwareOutput/`
-- `docs/Infrastructure/Utilities/`
-- `docs/Presentation/UserInterface/`
-- `docs/Presentation/ViewModels/`
-- `docs/Presentation/CompositionRoot/`
+Create the following directories under `docs/Architecture/`:
+
+- `docs/Architecture/` (CREATED - contains main architecture document and layer subdirectories)
+    - `docs/Architecture/Domain/` (CREATED)
+        - `docs/Architecture/Domain/Entities/`
+        - `docs/Architecture/Domain/ValueObjects/`
+        - `docs/Architecture/Domain/Interfaces/`
+        - `docs/Architecture/Domain/DomainServices/`
+        - `docs/Architecture/Domain/ConnectionManagementService/`
+    - `docs/Architecture/Application/` (CREATED)
+        - `docs/Architecture/Application/UseCases/RealTimeTelemetryAndForceFeedback/`
+        - `docs/Architecture/Application/UseCases/StopForceFeedback/`
+        - `docs/Architecture/Application/UseCases/LoadForceFeedbackProfile/`
+        - `docs/Architecture/Application/UseCases/SaveForceFeedbackProfile/`
+        - `docs/Architecture/Application/UseCases/AnalyzeLapTimes/`
+    - `docs/Architecture/Infrastructure/` (CREATED)
+        - `docs/Architecture/Infrastructure/Gateways/`
+        - `docs/Architecture/Infrastructure/Persistence/`
+        - `docs/Architecture/Infrastructure/HardwareOutput/`
+        - `docs/Architecture/Infrastructure/Utilities/`
+    - `docs/Architecture/Presentation/` (CREATED)
+        - `docs/Architecture/Presentation/UserInterface/`
+        - `docs/Architecture/Presentation/ViewModels/`
+        - `docs/Architecture/Presentation/CompositionRoot/`
 
 ### 1.2 Create Supporting Documentation Directories
 
@@ -147,34 +156,42 @@ Create the following directories under `docs/`:
 
 ---
 
-## Phase 2: Create Entry Point Document
+## Phase 2: Create Entry Point Documents
 
 ### 2.1 Create docs/README.md
 
-**Source:** Based on [docs/Rscing Simulator Force Feedback Architecture.md](docs/Rscing Simulator Force Feedback Architecture.md) with improvements
+**Purpose:** This README.md is the main entry point for the `docs/` directory, providing an overview of the documentation directory and organization. This is separate from the project root README.md.
+
+### 2.2: Create Architecture Entry Point Document
+
+### 2.2.1 Revise docs/Architecture/Racing Simulator Force Feedback Architecture.md
+
+Purpose: Racing Simulator Force Feedback Architecture.md is the main entry point for docs/Architecture providing an overview of the project Architecture  structure and organization.
+
+Currently this document is incomplete. 
 
 **Key Content:**
 
-- Executive overview (project goals, architectural principles)
-- High-level architecture overview
-- Links to each layer's documentation following the directory structure
-- Documentation philosophy
-- Capabilities template reference
+- Overview of the Architecture 
+- Navigation to Architecture document and layer-specific documentation
+- Links to supporting documentation (AI prompts, archive, legacy references)
+- Brief description of documentation organization philosophy
 
-**Changes from source:**
+**Structure:**
 
-- Fix typo in title ("Rscing" → "Racing")
-- Update all document links to point to new structure
-- Add navigation section for quick access
-- Keep it stable and high-level
+- Overview section explaining each part of Clean Architecture  
+- Links to layer-specific documentation (Domain, Application, Infrastructure, Presentation)
+- Links to supporting documentation directories
 
 **File:** [docs/README.md](docs/README.md)
+
+**Note:** The complete architectural overview with Clean Architecture details is in [Architecture/Racing Simulator Force Feedback Architecture.md](Architecture/Racing%20Simulator%20Force%20Feedback%20Architecture.md), not in the README.md.
 
 ---
 
 ## Phase 3: Transform Value Objects Documentation
 
-### 3.1 Create Domain/ValueObjects/ValueObjects.md
+### 3.1 Create Architecture/Domain/ValueObjects/ValueObjects.md
 
 **Source:** [docs_old/Detailed Design/Value Objects/Value Objects Analysis and Design.md](docs_old/Detailed Design/Value Objects/Value Objects Analysis and Design.md)
 
@@ -245,27 +262,27 @@ Create the following directories under `docs/`:
 
 1. **Domain Layer Content → Multiple Files**
 
-   - Entities section → `docs/Domain/Entities/Entities.md`
-   - Interfaces section → `docs/Domain/Interfaces/Interfaces.md`
-   - Domain Services section → `docs/Domain/DomainServices/DomainServices.md`
-   - Connection Management → `docs/Domain/ConnectionManagementService/ConnectionManagementService.md`
+   - Entities section → `docs/Architecture/Domain/Entities/Entities.md`
+   - Interfaces section → `docs/Architecture/Domain/Interfaces/Interfaces.md`
+   - Domain Services section → `docs/Architecture/Domain/DomainServices/DomainServices.md`
+   - Connection Management → `docs/Architecture/Domain/ConnectionManagementService/ConnectionManagementService.md`
 1. **Application Layer Content**
 
-   - Real-Time Telemetry → `docs/Application/UseCases/RealTimeTelemetryAndForceFeedback/RealTimeTelemetryAndForceFeedback.md`
-   - Stop FFB → `docs/Application/UseCases/StopForceFeedback/StopForceFeedback.md`
-   - Profile Management → `docs/Application/UseCases/LoadForceFeedbackProfile/` and `SaveForceFeedbackProfile/`
-   - Data Logging → `docs/Application/UseCases/AnalyzeLapTimes/AnalyzeLapTimes.md`
+   - Real-Time Telemetry → `docs/Architecture/Application/UseCases/RealTimeTelemetryAndForceFeedback/RealTimeTelemetryAndForceFeedback.md`
+   - Stop FFB → `docs/Architecture/Application/UseCases/StopForceFeedback/StopForceFeedback.md`
+   - Profile Management → `docs/Architecture/Application/UseCases/LoadForceFeedbackProfile/` and `SaveForceFeedbackProfile/`
+   - Data Logging → `docs/Architecture/Application/UseCases/AnalyzeLapTimes/AnalyzeLapTimes.md`
 1. **Infrastructure Layer Content**
 
-   - Gateways section → `docs/Infrastructure/Gateways/Gateways.md`
-   - Persistence section → `docs/Infrastructure/Persistence/Persistence.md`
-   - Hardware Output → `docs/Infrastructure/HardwareOutput/HardwareOutput.md`
-   - Utilities → `docs/Infrastructure/Utilities/Utilities.md`
+   - Gateways section → `docs/Architecture/Infrastructure/Gateways/Gateways.md`
+   - Persistence section → `docs/Architecture/Infrastructure/Persistence/Persistence.md`
+   - Hardware Output → `docs/Architecture/Infrastructure/HardwareOutput/HardwareOutput.md`
+   - Utilities → `docs/Architecture/Infrastructure/Utilities/Utilities.md`
 1. **Presentation Layer Content**
 
-   - UI section → `docs/Presentation/UserInterface/UserInterface.md`
-   - ViewModels → `docs/Presentation/ViewModels/ViewModels.md`
-   - DI Setup → `docs/Presentation/CompositionRoot/CompositionRoot.md`
+   - UI section → `docs/Architecture/Presentation/UserInterface/UserInterface.md`
+   - ViewModels → `docs/Architecture/Presentation/ViewModels/ViewModels.md`
+   - DI Setup → `docs/Architecture/Presentation/CompositionRoot/CompositionRoot.md`
 
 **Format:** Each file should follow the capabilities template structure from the architecture document.
 
@@ -348,9 +365,11 @@ Files:
 
 Files:
 
-- [docs/Rscing Simulator Force Feedback Architecture.md](docs/Rscing Simulator Force Feedback Architecture.md) → `docs/archive/templates/Racing Simulator Force Feedback Architecture.md`
+- [docs/Rscing Simulator Force Feedback Architecture.md](docs/Rscing Simulator Force Feedback Architecture.md) → `docs/archive/templates/Racing Simulator Force Feedback Architecture.md` (original template with typo)
 - [docs_old/Architecture/BuildingTradeoffs.md](docs_old/Architecture/BuildingTradeoffs.md) → `docs/archive/architecture/BuildingTradeoffs.md`
 - [docs_old/Architecture/HybridImplementationPlan.md](docs_old/Architecture/HybridImplementationPlan.md) → `docs/archive/architecture/HybridImplementationPlan.md`
+
+**Note:** The corrected and enhanced architecture document is now at `docs/Architecture/Racing Simulator Force Feedback Architecture.md` (created in Phase 2).
 
 ### 7.2 Archive Implementation Plans
 
@@ -406,7 +425,8 @@ Consider adding a navigation index or table of contents to each major section.
 
 ## Success Criteria
 
-- [ ] Single entry point document exists at `docs/README.md`
+- [ ] Single entry point document exists at `docs/README.md` (overview of docs directory)
+- [ ] Architecture document exists at `docs/Architecture/Racing Simulator Force Feedback Architecture.md` (complete Clean Architecture overview)
 - [ ] All documentation follows layer-based directory structure
 - [ ] Value Objects documentation transformed to capabilities/behaviors format
 - [ ] No implementation details in capability documents
