@@ -50,11 +50,13 @@ The system follows **Clean Architecture** (also known as Onion Architecture or H
 ### Dependency Rule
 
 The dependency rule states that:
+
 - **Source code dependencies can only point inward**
 - Nothing in an inner layer can know anything about an outer layer
 - Inner layers define interfaces (ports), outer layers implement them (adapters)
 
 This ensures that:
+
 - Business logic remains independent of frameworks, databases, and UI
 - The system can be tested in isolation
 - Technology choices can be changed without affecting core business logic
@@ -68,19 +70,6 @@ The architecture consists of four main layers:
 2. **Application Layer** – Use cases and orchestration logic
 3. **Infrastructure Layer** – External concerns (simulators, hardware, persistence)
 4. **Presentation Layer** (outermost) – WPF MVVM user interface
-
-Each layer has a clearly defined responsibility and communicates only through stable interfaces.
-
----
-
-## Architectural Overview
-
-The system follows a **hybrid Clean Architecture** with four core layers:
-
-1. **Domain Layer** – Core business rules and domain models
-2. **Application Layer** – Use cases and orchestration logic
-3. **Adapters / Infrastructure Layer** – External concerns (simulators, hardware, persistence)
-4. **Presentation Layer** – WPF MVVM user interface and application startup
 
 Each layer has a clearly defined responsibility and communicates only through stable interfaces.
 
@@ -112,23 +101,14 @@ The Domain Layer defines:
 
 ### Domain Elements
 
-#### Entities
-
 [Entities](Domain/Entities/Entities.md)
-
-*Capability:* Defines domain objects with identity and lifecycle that represent core business concepts.
 
 Entities are objects that have a unique identity and lifecycle. They represent the core business concepts that persist over time and have state that changes.
 
-#### Value Objects
-
 [Value Objects](Domain/ValueObjects/ValueObjects.md)
 
-*Capability:* Immutable, simulator‑agnostic data types representing telemetry, configuration, and force feedback output.
-
-For comprehensive analysis and design details, see [Value Objects Analysis and Design](../../docs_old/Detailed%20Design/Value%20Objects/Value%20Objects%20Analysis%20and%20Design.md).
-
 The Value Objects component includes immutable data structures representing:
+
 - Telemetry measurements (SteeringWheelAngle, YawRate, Velocity, Speed, GForce, EngineRPM, ShockVelocity, TireLoad)
 - Hardware input (WheelPosition, WheelVelocity)
 - Force feedback output (ForceFeedbackVector)
@@ -137,37 +117,27 @@ The Value Objects component includes immutable data structures representing:
 
 All value objects are generic and simulator-agnostic, following TDD principles with comprehensive validation and testing.
 
-#### Interfaces (Gateways / Ports)
-
 [Interfaces](Domain/Interfaces/Interfaces.md)
-
-*Capability:* Defines contracts for telemetry input, hardware output, configuration, and logging.
 
 Interfaces (also called Ports in Hexagonal Architecture) define the contracts that external systems must satisfy. These are implemented by adapters in the Infrastructure Layer.
 
 Key interfaces include:
+
 - **ISimulatorTelemetryGateway** – Contract for reading telemetry from simulators
 - **IForceFeedbackPort** – Contract for sending FFB commands to hardware
 - **IConfigurationRepository** – Contract for persisting and retrieving configuration
 - **ILoggingService** – Contract for logging events
 
-#### Domain Services
-
 [Domain Services](Domain/DomainServices/DomainServices.md)
-
-*Capability:* Encapsulates complex business logic that does not belong to a single entity.
 
 Domain Services contain business logic that doesn't naturally fit within a single entity or value object. They operate on domain objects and enforce business rules.
 
 Key services include:
+
 - **Force Feedback Calculation Service** – Calculates force feedback vectors from telemetry
 - **Telemetry Processing Service** – Processes raw telemetry data
 
-#### Connection Management Service
-
 [Connection Management Service](Domain/ConnectionManagementService/ConnectionManagementService.md)
-
-*Capability:* Coordinates detection and management of simulator connections.
 
 This service manages the complex process of detecting running simulators and establishing connections to their telemetry streams.
 
@@ -194,32 +164,25 @@ This layer answers the question:
 The Application Layer defines all system behaviors as explicit use cases. Each use case is independently testable and represents a user or system‑level capability.
 
 Use cases are organized into:
+
 - **Commands** – Operations that change system state
 - **Queries** – Operations that retrieve information without side effects
 
 ### Application Elements
 
-#### Use Cases
+#### Use Cases 
 
-- **RealTimeTelemetryAndForceFeedback**  
-  [RealTimeTelemetryAndForceFeedback](Application/UseCases/RealTimeTelemetryAndForceFeedback/RealTimeTelemetryAndForceFeedback.md)  
-  *Capability:* Ingests telemetry, applies force feedback algorithms, and outputs real‑time force commands.
+[RealTimeTelemetryAndForceFeedback](Application/UseCases/RealTimeTelemetryAndForceFeedback/RealTimeTelemetryAndForceFeedback.md)  
 
-- **StopForceFeedback**  
-  [StopForceFeedback](Application/UseCases/StopForceFeedback/StopForceFeedback.md)  
-  *Capability:* Immediately halts force output to the wheel under error or user‑initiated conditions.
+[StopForceFeedback](Application/UseCases/StopForceFeedback/StopForceFeedback.md)  
 
-- **LoadForceFeedbackProfile**  
-  [LoadForceFeedbackProfile](Application/UseCases/LoadForceFeedbackProfile/LoadForceFeedbackProfile.md)  
-  *Capability:* Loads and applies a stored force feedback profile.
+[LoadForceFeedbackProfile](Application/UseCases/LoadForceFeedbackProfile/LoadForceFeedbackProfile.md)  
 
-- **SaveForceFeedbackProfile**  
-  [SaveForceFeedbackProfile](Application/UseCases/SaveForceFeedbackProfile/SaveForceFeedbackProfile.md)  
-  *Capability:* Persists user‑defined force feedback configurations.
+[SaveForceFeedbackProfile](Application/UseCases/SaveForceFeedbackProfile/SaveForceFeedbackProfile.md)  
 
-- **AnalyzeLapTimes**  
-  [AnalyzeLapTimes](Application/UseCases/AnalyzeLapTimes/AnalyzeLapTimes.md)  
-  *Capability:* Analyzes recorded session data to compute lap and sector times.
+[AnalyzeLapTimes](Application/UseCases/AnalyzeLapTimes/AnalyzeLapTimes.md)  
+
+
 
 ---
 
@@ -245,35 +208,21 @@ All simulator‑specific, hardware‑specific, and framework‑specific logic li
 
 ### Infrastructure Elements
 
-#### Gateways
-
 [Gateways](Infrastructure/Gateways/Gateways.md)
-
-*Capability:* Connects to simulator telemetry sources and adapts raw data into domain value objects.
 
 Gateways implement the `ISimulatorTelemetryGateway` interface and handle the protocol-specific details of communicating with different simulators (iRacing, Assetto Corsa, etc.).
 
-#### Persistence
-
 [Persistence](Infrastructure/Persistence/Persistence.md)
-
-*Capability:* Stores and retrieves configuration, profiles, and session data.
 
 Persistence implementations handle all data storage concerns, implementing interfaces like `IConfigurationRepository` and `ITelemetryRepository`.
 
-#### Hardware Output
-
 [Hardware Output](Infrastructure/HardwareOutput/HardwareOutput.md)
-
-*Capability:* Sends force feedback commands to physical steering wheel hardware.
 
 Hardware output implementations send force feedback vectors to physical hardware using manufacturer-specific SDKs or APIs (Simucube, Fanatec, etc.).
 
 #### Utilities & Logging
 
 [Utilities & Logging](Infrastructure/Utilities/Utilities.md)
-
-*Capability:* Provides logging and supporting infrastructure concerns.
 
 This includes concrete logging implementations, file system utilities, and other cross-cutting infrastructure concerns.
 
@@ -301,207 +250,16 @@ The system uses **WPF with MVVM**. ViewModels invoke Application use cases and e
 
 ### Presentation Elements
 
-#### User Interface
-
-[User Interface](Presentation/UserInterface/UserInterface.md)
-
-*Capability:* Presents force feedback state, configuration, and diagnostics to the user.
+[User Interface](Presentation/UserInterface/UserInterface.md).
 
 The UI consists of WPF XAML views that bind to ViewModels and display information to users.
 
-#### Adapter / Controllers (ViewModels)
-
-[ViewModels](Presentation/ViewModels/ViewModels.md)
-
-*Capability:* Translates user input into application use case invocations.
+[ViewModels](Presentation/ViewModels/ViewModels.md).
 
 ViewModels implement the MVVM pattern, exposing properties and commands that the UI binds to, and invoking use cases from the Application Layer.
 
-#### Composition Root
-
 [Composition Root](Presentation/CompositionRoot/CompositionRoot.md)
-
-*Capability:* Assembles the application object graph and configures dependency injection.
 
 The Composition Root (typically in `App.xaml.cs`) is where all dependencies are wired together, infrastructure implementations are registered, and the application's object graph is assembled.
 
 ---
-
-## Documentation Philosophy
-
-- This document is **stable and high‑level**
-- Lower‑level documents contain capabilities, behavior descriptions, and tests
-- Changes are driven by **new or failing tests**, not speculative design
-- Architecture evolves incrementally but intentionally
-
-This document is the map. The rest of the documentation is the territory.
-
----
-
-## Capabilities Template
-
-> **Purpose**  
-> This document defines *why this component exists* and *what it must do*, independent of implementation details.  
-> It is the primary **TDD driver document** for this component.
->
-> This document should change **infrequently**. If it changes, it is usually because:
-> - A requirement was misunderstood
-> - A new legitimate capability was discovered
-> - Tests revealed an invalid assumption
->
-> Do **not** document implementation details here.
-
----
-
-### 1. Capability
-
-**One sentence describing why this component exists.**
-
-- Focus on *intent*, not mechanics
-- Avoid framework, technology, or class names
-- Phrase it so a non-UI consumer (test, service, batch process) could invoke it
-
-**Example:**  
-> Calculates and outputs real-time force feedback commands from simulator telemetry.
-
----
-
-### 2. Context
-
-**Describe where this capability fits in the system.**
-
-Include:
-- Which layer this component belongs to
-- Who/what calls it
-- What it collaborates with (at a high level)
-
-Avoid:
-- Method names
-- Class diagrams
-- Control flow details
-
-**Guidance questions:**
-- Is this triggered by a user action, a system event, or a continuous process?
-- Is this synchronous or asynchronous from the caller's perspective?
-
----
-
-### 3. Inputs
-
-**Describe the information this capability requires.**
-
-- Use domain language, not DTO or API names
-- Specify constraints and expectations
-- If input is optional or conditional, say so
-
-**Example format:**
-- Telemetry data point (validated, time-ordered)
-- Active force feedback profile
-- Current simulator connection state
-
----
-
-### 4. Outputs
-
-**Describe what this capability produces or affects.**
-
-Outputs may be:
-- Returned values
-- State changes
-- Commands sent through ports
-
-Be explicit about:
-- Guarantees (e.g., always produced, best-effort, conditional)
-- Observable effects
-
----
-
-### 5. Behaviors
-
-**List the externally observable behaviors that define correctness.**
-
-Each behavior:
-- Is testable
-- Is phrased in business/domain terms
-- Avoids algorithmic detail
-
-Use numbered statements.
-
-**Example:**
-1. When telemetry is received, a force feedback command is produced within the same update cycle.
-2. When telemetry input is invalid, no force is sent to the hardware.
-3. When the system is paused, force output is zeroed.
-
-> If a behavior cannot be tested, it does not belong here.
-
----
-
-### 6. Invariants
-
-**List conditions that must always be true, regardless of implementation.**
-
-These guide refactoring and prevent accidental rule erosion.
-
-**Examples:**
-- Force feedback output must never exceed configured safety limits.
-- Domain objects remain immutable.
-- No infrastructure concern leaks into the domain.
-
----
-
-### 7. Failure Modes
-
-**Describe how this capability behaves when things go wrong.**
-
-Include:
-- Invalid input
-- Missing dependencies
-- External system failures
-
-State:
-- What happens
-- What does *not* happen
-
-Avoid exception-class-level detail.
-
----
-
-### 8. Non-Goals
-
-**Explicitly state what this capability does *not* do.**
-
-This prevents scope creep and accidental coupling.
-
-**Examples:**
-- Does not manage simulator discovery
-- Does not persist configuration
-- Does not perform UI updates
-
----
-
-### 9. Change Policy
-
-**Define how and when this document is allowed to change.**
-
-Typical rules:
-- Adding a behavior requires a new failing test
-- Removing a behavior requires explicit review
-- Design changes do *not* require changes here unless behavior changes
-
----
-
-### 10. Related Artifacts
-
-**Link to relevant documents and tests.**
-
-- Related capabilities
-- High-level tests
-- Architecture overview
-
-Keep this section lightweight and navigational.
-
----
-
-> **Rule of Thumb**  
-> If you are tempted to explain *how*, you are in the wrong document.
-> Explain *why* and *what*, then write tests.
