@@ -56,10 +56,6 @@ Currently this document is incomplete.
 
 ## Phase 3: Transform Value Objects Documentation
 
-### 3.1 Create Architecture/Domain/ValueObjects/ValueObjects.md
-
-**Source:** [docs_old/Detailed Design/Value Objects/Value Objects Analysis and Design.md](docs_old/Detailed Design/Value Objects/Value Objects Analysis and Design.md)
-
 **Transformation Rules:**
 
 1. **Keep:**
